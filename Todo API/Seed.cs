@@ -13,13 +13,13 @@ namespace Todo_API
             {
                 var todos = new List<Todo>()
                 {
-                    new Todo()
+                    new()
                     {
                         Title = "todo1",
                         Description = "Description1",
                         CreatedAt = DateTime.Now,
                     },
-                    new Todo()
+                    new()
                     {
                         Title = "todo2",
                         Description = "Description2",
