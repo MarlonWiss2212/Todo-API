@@ -1,9 +1,11 @@
-﻿namespace Todo_API.DTO
+﻿using Todo_API.Models;
+
+namespace Todo_API.DTO
 {
-    public class TodoDTO
+    public class TodoDTO(Todo todo)
     {
-        public int Id { get; set; }
-        public required string Title { get; set; }
-        public required string Description { get; set; }
+        public int Id { get; set; } = todo.Id;
+        public string Title { get; set; } = todo.Title;
+        public string Description { get; set; } = todo.Description;
     }
 }
