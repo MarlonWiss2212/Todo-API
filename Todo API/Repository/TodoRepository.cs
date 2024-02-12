@@ -4,13 +4,14 @@ using Todo_API.Models;
 
 namespace Todo_API.Repository
 {
-    public class TodoRepository : ITodoRepository
+    public class TodoRepository(DataContext context) : ITodoRepository
     {
-        private readonly DataContext _context;
+        private readonly DataContext _context = context;
 
-        public TodoRepository(DataContext context) 
+        public bool CreateTodo(Todo todo)
         {
-            _context = context;
+            _context.Add(todo);
+            return Save();
         }
 
         public Todo? GetTodo(int id)
@@ -22,6 +23,12 @@ namespace Todo_API.Repository
         public ICollection<Todo> GetTodos()
         {
             return _context.Todos.OrderBy(todo => todo.Id).ToList();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0;
         }
     }
 }
