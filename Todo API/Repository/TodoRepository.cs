@@ -16,13 +16,24 @@ namespace Todo_API.Repository
 
         public Todo? GetTodo(int id)
         {
-            Todo? todo = _context.Todos.Where(todo => todo.Id == id).FirstOrDefault();
-            return todo;
+            return _context.Todos.Where(todo => todo.Id == id).FirstOrDefault();
         }
 
         public ICollection<Todo> GetTodos()
         {
             return _context.Todos.OrderBy(todo => todo.Id).ToList();
+        }
+
+        public bool UpdateTodo(Todo todo)
+        {
+            _context.Update(todo);
+            return Save();
+        }
+
+        public bool DeleteTodo(Todo todo)
+        {
+            _context.Remove(todo);
+            return Save();
         }
 
         public bool Save()
